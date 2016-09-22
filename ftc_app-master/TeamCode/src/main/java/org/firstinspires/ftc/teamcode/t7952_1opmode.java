@@ -69,6 +69,7 @@ public class PushbotTeleopTank_Iterative extends OpMode {
     double RightMotorRearPower = 0;
     double leftMotorFrontPower = 0;
     double RightMotorFrontPower = 0;
+    double flipperMotor1 = 0;
 
 
     @Override
