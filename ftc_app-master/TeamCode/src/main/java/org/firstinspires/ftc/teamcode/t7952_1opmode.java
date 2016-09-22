@@ -64,12 +64,15 @@ public class PushbotTeleopTank_Iterative extends OpMode {
     DcMotor leftMotorRear;
     DcMotor rightMotorRear;
     DcMotor flipperMotor1;
+    DcMotor radMotor1;
+    DcMotor radMotor2;    
     //double_explanation//
     double leftMotorRearPower = 0;
     double RightMotorRearPower = 0;
     double leftMotorFrontPower = 0;
     double RightMotorFrontPower = 0;
     double flipperMotor1 = 0;
+    double radMotor = 0;
 
 
     @Override
@@ -86,6 +89,8 @@ public class PushbotTeleopTank_Iterative extends OpMode {
        final static String leftMotorRear = hardwareMap.dcMotor.get("left motor rear");
        final static String RightMotorRear = hardwareMap.dcMotor.get("right motor rear");
        final static String flipperMotor = hardwareMap.dcMotor.get("shoot motor");
+       final static String radMotor1 = hardwareMap.dcMotor.get("belt motor1");
+       final static String radMotor2 = hardwareMap.dcMotor.get("belt motor2");
 
         // "Reverse" the motor that runs backwards when connected directly to the battery
         leftMotorFront.setDirection(DcMotor.Direction.FORWARD);
