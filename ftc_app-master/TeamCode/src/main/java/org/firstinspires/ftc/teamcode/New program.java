@@ -15,5 +15,9 @@ DcMotor leftMotorFront;
 DcMotor rightMotorFront;
 DcMotor leftMotorBack;
 DcMotor rightMotorback;
+DcMotor flipper;
 double leftMotorFront(0);
-double
+double rightMotorFront(0);
+double leftMotorBack(0);
+double rightMotorBack(0);
+double fliper;
