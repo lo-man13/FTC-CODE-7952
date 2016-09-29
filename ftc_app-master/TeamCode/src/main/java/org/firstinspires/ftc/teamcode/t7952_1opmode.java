@@ -72,7 +72,7 @@ public class PushbotTeleopTank_Iterative extends OpMode {
     double leftMotorFrontPower = 0;
     double RightMotorFrontPower = 0;
     double flipperMotor1 = 0;
-    double radMotor = 0;
+    double flipperMotor2 = 0;
 
 
     @Override
@@ -88,9 +88,8 @@ public class PushbotTeleopTank_Iterative extends OpMode {
        final static String rightMotorFront = hardwareMap.dcMotor.get("right motor front");
        final static String leftMotorRear = hardwareMap.dcMotor.get("left motor rear");
        final static String RightMotorRear = hardwareMap.dcMotor.get("right motor rear");
-       final static String flipperMotor = hardwareMap.dcMotor.get("shoot motor");
-       final static String radMotor1 = hardwareMap.dcMotor.get("belt motor1");
-       final static String radMotor2 = hardwareMap.dcMotor.get("belt motor2");
+       final static String flipperMotor1 = hardwareMap.dcMotor.get("belt motor1");
+       final static String flipperMotor2 = hardwareMap.dcMotor.get("belt motor2");
 
         // "Reverse" the motor that runs backwards when connected directly to the battery
         leftMotorFront.setDirection(DcMotor.Direction.FORWARD);
@@ -98,6 +97,7 @@ public class PushbotTeleopTank_Iterative extends OpMode {
         leftMotorRear.setDirection(DcMotor.Direction.FORWARD);
         rightMotorRear.setDirection(DcMotor.Direction.REVERSE);
         flipperMotor1.setDirection(DcMotor.Direction.FORWARD);
+        flipperMotor2.setDirection(DcMotor.Direction.FORWARD);
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
@@ -113,6 +113,7 @@ public class PushbotTeleopTank_Iterative extends OpMode {
             leftMotorRear.setPower(-gamepad1.left_stick_y);
             rightMotorRear.setPower (-gamepad1.right_stick_y);
             flipperMotor1.setPower (-gamepad2.right_trigger);
+            flipperMotor2.setPower (-gamepad2.right_trigger);
 
             idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
         }
