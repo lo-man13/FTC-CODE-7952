@@ -33,10 +33,12 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -53,13 +55,27 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="Template: Linear OpMode", group="Linear Opmode")  // @Autonomous(...) is the other common choice
-@Disabled
-public class TemplateOpMode_Linear extends LinearOpMode {
+public class PushbotTeleopTank_Iterative extends OpMode {
 
     /* Declare OpMode members. */
+    //Declare all DC Motors here//
     private ElapsedTime runtime = new ElapsedTime();
-    // DcMotor leftMotor = null;
-    // DcMotor rightMotor = null;
+    DcMotor leftMotorFront;
+    DcMotor rightMotorFront;
+    DcMotor leftMotorRear;
+    DcMotor rightMotorRear;
+    DcMotor flipperMotor1;
+    DcMotor radMotor1;
+    DcMotor radMotor2;
+    Servo dumb;
+    double leftMotorRearPower = 0;
+    double RightMotorRearPower = 0;
+    double leftMotorFrontPower = 0;
+    double RightMotorFrontPower = 0;
+    double flipperMotor1 = 0;
+    double flipperMotor2 = 0;
+    double dumb = 0;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -70,14 +86,20 @@ public class TemplateOpMode_Linear extends LinearOpMode {
          * to 'get' must correspond to the names assigned during the robot configuration
          * step (using the FTC Robot Controller app on the phone).
          */
-        // leftMotor  = hardwareMap.dcMotor.get("left motor");
-        // rightMotor = hardwareMap.dcMotor.get("right motor");
+       final static String leftMotorFront  = hardwareMap.dcMotor.get("left motor front");
+       final static String rightMotorFront = hardwareMap.dcMotor.get("right motor front");
+       final static String leftMotorRear = hardwareMap.dcMotor.get("left motor rear");
+       final static String RightMotorRear = hardwareMap.dcMotor.get("right motor rear");
+       final static String flipperMotor1 = hardwareMap.dcMotor.get("belt motor1");
+       final static String flipperMotor2 = hardwareMap.dcMotor.get("belt motor2");
 
-        // eg: Set the drive motor directions:
         // "Reverse" the motor that runs backwards when connected directly to the battery
-        // leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        // rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-
+        leftMotorFront.setDirection(DcMotor.Direction.FORWARD);
+        rightMotorFront.setDirection(DcMotor.Direction.REVERSE);
+        leftMotorRear.setDirection(DcMotor.Direction.FORWARD);
+        rightMotorRear.setDirection(DcMotor.Direction.REVERSE);
+        flipperMotor1.setDirection(DcMotor.Direction.FORWARD);
+        flipperMotor2.setDirection(DcMotor.Direction.FORWARD);
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
@@ -87,9 +109,13 @@ public class TemplateOpMode_Linear extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
 
-            // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
-            // leftMotor.setPower(-gamepad1.left_stick_y);
-            // rightMotor.setPower(-gamepad1.right_stick_y);
+            //Set the power of each motor to be controlled by each control stick corrosponding to the side of the motor//
+            leftMotorFront.setPower(-gamepad1.left_stick_y);
+            rightMotorFront.setPower(-gamepad1.right_stick_y);
+            leftMotorRear.setPower(-gamepad1.left_stick_y);
+            rightMotorRear.setPower (-gamepad1.right_stick_y);
+            flipperMotor1.setPower (-gamepad2.right_trigger);
+            flipperMotor2.setPower (-gamepad2.right_trigger);
 
             idle(); // Always call idle() at the bottom of your while(opModeIsActive()) loop
         }
